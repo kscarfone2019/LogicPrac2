@@ -14,7 +14,7 @@ int main() {
     stackInit(&workStack, 3);
 
 
-    int arg1 = 2;
+    int arg1 = 3;
     char arg2[] = "ab&cd|";
     //take in equation and add each element to stack
     for (int i = 0; i < 3; i++) {
@@ -34,18 +34,36 @@ int main() {
     return 1;
 }
 void evaluateAnd(int n) {
+    //portion of code for printing header of table
+    char alpha[] = "abcdefghijklmnopqrstuvwxyz";
+    for (int x = 0; x < n; x++) {
+        printf(" %c ", alpha[x]);
+    }
+    printf("   Result");
+    printf("\n");
+    //each n value takes up 3 spaces and result takes up 9
+    int count = (n*3)+(9); //calculate how many dashes needed for table
+    for (int b = 0; b < count; b++) {
+        printf("-");
+    }
+    printf("\n");
+
     int and, result;
+
+
+
     //int n = 2;
     //((2^n)-1) for i<=3 instead make var or something
     int rows = power(2, n);
+
     for(int i=0;i<=(rows-1);i++) {
         and=1;
         for(int j=n-1;j>=0;j--) {
             result=i>>j; //assigns 1 or 0 to result depeing if there equal or not
-            printf("%d\t",result & 1);
+            printf(" %d ",result & 1);
             and=and &(result & 1); //line that changes between and or/ so on
         }
-    printf("%d\n", and);
+    printf(" :   %d\n", and);
     }
 }
 int power(int base, int power) {
