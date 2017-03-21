@@ -15,9 +15,9 @@ int main() {
 
 
     int arg1 = 2;
-    char arg2[] = "ab&cd&";
+    char arg2[] = "ab&cd|";
     //take in equation and add each element to stack
-    for (size_t i = 0; i < 3; i++) {
+    for (int i = 0; i < 3; i++) {
         if(isalpha(arg2[i])) {
             stackPush(&workStack, arg2[i]);
         }
