@@ -11,10 +11,10 @@ int power(int base, int power);
 //arguments for main: int varSize, char formula
 int main() {
     stack workStack;
-    stackInit(&workStack, 3);
+    stackInit(&workStack, 4);
 
 
-    int arg1 = 3;
+    int arg1 = 2;
     char arg2[] = "ab&cd|";
     //take in equation and add each element to stack
     for (int i = 0; i < 3; i++) {
@@ -48,22 +48,36 @@ void evaluateAnd(int n) {
     }
     printf("\n");
 
-    int and, result;
 
 
 
+    int result, nVal;
     //int n = 2;
     //((2^n)-1) for i<=3 instead make var or something
     int rows = power(2, n);
 
     for(int i=0;i<=(rows-1);i++) {
-        and=1;
+        //result=1;
         for(int j=n-1;j>=0;j--) {
-            result=i>>j; //assigns 1 or 0 to result depeing if there equal or not
-            printf(" %d ",result & 1);
-            and=and &(result & 1); //line that changes between and or/ so on
+            nVal=i>>j; //assigns 1 or 0 to result depeing if there equal or not
+            printf(" %d ",nVal & 1);
+
+            if(j>0) {
+                result = 0;
+                result = result ^(nVal & 1);
+                //result = nVal^1;
+            }
+            else {
+                result = 1;
+                result=result &(nVal & 1); //line that changes between and or/ so on
+
+            }
+
+            //printf("%i", j);
+            //result = result & (nVal & 1);
+
         }
-    printf(" :   %d\n", and);
+    printf(" :   %d\n", result);
     }
 }
 int power(int base, int power) {
