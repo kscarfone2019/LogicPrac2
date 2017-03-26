@@ -59,6 +59,7 @@ void evaluateAnd(int n) {
     for(int i=0;i<=(rows-1);i++) {
         //result=1;
         for(int j=n-1;j>=0;j--) {
+            //printf("i: %i J: %i\n", i, j);
             nVal=i>>j; //assigns 1 or 0 to result depeing if there equal or not
             printf(" %d ",nVal & 1);
 
