@@ -5,7 +5,7 @@
 //false = 0
 //true = 1
 //need array to hold returned values
-void evaluateAnd();
+void evaluateAnd(int n, char operand);
 void printTable(char a, char b, char c, char d);
 int power(int base, int power);
 //arguments for main: int varSize, char formula
@@ -25,7 +25,7 @@ int main() {
             char temp1 = stackPop(&workStack);
             char temp2 = stackPop(&workStack);
             // for loop to change between 0 and 1
-            evaluateAnd(arg1);
+            evaluateAnd(arg1, '&');
 
         }
 
@@ -33,7 +33,7 @@ int main() {
 
     return 1;
 }
-void evaluateAnd(int n) {
+void evaluateAnd(int n, char operand) {
     //portion of code for printing header of table
     char alpha[] = "abcdefghijklmnopqrstuvwxyz";
     for (int x = 0; x < n; x++) {
@@ -58,25 +58,26 @@ void evaluateAnd(int n) {
 
     for(int i=0;i<=(rows-1);i++) {
         //result=1;
+        char test = '&';
+
         for(int j=n-1;j>=0;j--) {
             //printf("i: %i J: %i\n", i, j);
             nVal=i>>j; //assigns 1 or 0 to result depeing if there equal or not
             printf(" %d ",nVal & 1);
 
-            if(j>0) {
+            switch (operand) {
+                case '&':
+                result = 1;
+                result = result &(nVal & 1);
+                case '^':
                 result = 0;
                 result = result ^(nVal & 1);
-                //result = nVal^1;
-            }
-            else {
-                result = 1;
-                result=result &(nVal & 1); //line that changes between and or/ so on
-
             }
 
+
+             //line that changes between and or/ so on
             //printf("%i", j);
             //result = result & (nVal & 1);
-
         }
     printf(" :   %d\n", result);
     }
