@@ -14,7 +14,8 @@ int main() {
 
 
     int arg1 = 2;
-    char arg2[] = "ab&";
+    //char arg2[] = "ab&c&";
+    char arg2[] = "ab|c&";
     char equationArr[] = "";
 
     int equationLength = strlen(arg2);
@@ -23,44 +24,118 @@ int main() {
     //transfer equation array to array with numbers in it 1 or 0
     //then loop through and push/pop
     //print out truth table from there
-    for (size_t i = 0; i < equationLength; i++) {
-        if(arg2[i] != '&') {
-            equationArr[i] = '0';
+
+    //equationArr[0] = '1';
+
+    for (int i = 0; i < equationLength; i++) {
+        if(arg2[i] == '^') {
+            equationArr[i] = '^';
         }
-        else {
+        else if(arg2[i] == '&') {
             equationArr[i] = '&';
         }
+        else if(arg2[i] == '|') {
+            equationArr[i] = '|';
+        }
+        else if(arg2[i] != '^') {
+            if(arg2[i] != '&') {
+                if(arg2[i] != '|') {
+                    equationArr[i] = '1';
+                }
+
+            }
+        }
     }
+    //equationArr[3] = '1';
+    printf("\n");
+    for (size_t x = 0; x < equationLength; x++) {
+        printf("%c", equationArr[x]);
+    }
+    printf("\n");
+
 
     //dp actial solving when operand found
-    for (size_t j = 0; j < equationLength; j++) {
+    char firstNum, secondNum, one, zero;
+    int alpha, beta, result;
+    for (int j = 0; j < equationLength; j++) {
         if(equationArr[j] != '&') {
-            stackPush(&workStack, equationArr[j]);
+            if(equationArr[j] != '^') {
+                stackPush(&workStack, equationArr[j]);
+            }
+
         }
-        else if(equationArr[j] == '&'){
+        //AND
+        if(equationArr[j] == '&'){
             //pop top two and solve
-            char firstNum = stackPop(&workStack);
-            char secondNum = stackPop(&workStack);
+            firstNum = stackPop(&workStack);
+            secondNum = stackPop(&workStack);
+            //printf("first: %c\n", firstNum);
+            //printf("second: %c\n", secondNum);
 
-            int alpha = firstNum - '0'; //1
-            int beta = secondNum - '0'; //1
-            printf("alpha: %i\n", alpha);
-            printf("beta: %i\n", beta);
-            int result = 1;
+            alpha = firstNum - '0'; //1
+            beta = secondNum - '0'; //1
 
-            result = result &(alpha&0);
-
-            printf("result: %i\n", result);
+            if((alpha && beta) == 1) {
+                result = 1;
+                one = result + '0';
+                stackPush(&workStack, one);
+            }
+            else {
+                result = 0;
+                zero = result + '0';
+                stackPush(&workStack, zero);
+            }
         }
+        //XOR
+        if(equationArr[j] == '^'){
+            //pop top two and solve
+            firstNum = stackPop(&workStack);
+            secondNum = stackPop(&workStack);
+            //printf("first: %c\n", firstNum);
+            //printf("second: %c\n", secondNum);
+
+            alpha = firstNum - '0'; //1
+            beta = secondNum - '0'; //1
+
+            if((alpha ^ beta) == 1) {
+                result = 1;
+                one = result + '0';
+                stackPush(&workStack, one);
+            }
+            else {
+                result = 0;
+                zero = result + '0';
+                stackPush(&workStack, zero);
+            }
+        }
+        //(−, |, &, #, > or =)
+        //OR
+        if(equationArr[j] == '|') {
+            //pop top two and solve
+            firstNum = stackPop(&workStack);
+            secondNum = stackPop(&workStack);
+            //printf("first: %c\n", firstNum);
+            //printf("second: %c\n", secondNum);
+
+            alpha = firstNum - '0'; //1
+            beta = secondNum - '0'; //1
+
+            if((alpha || beta) == 1) {
+                result = 1;
+                one = result + '0';
+                stackPush(&workStack, one);
+            }
+            else {
+                result = 0;
+                zero = result + '0';
+                stackPush(&workStack, zero);
+            }
+        }
+
     }
+    printf("result: %c\n", stackPop(&workStack));
+    //printStack(&workStack);
+    //for and '&'
+    //get size of stack first
 
-
-
-    /*
-    for (size_t i = 0; i < equationLength; i++) {
-        printf("%c\n", equationArr[i]);
-    }
-    //free(equationArr);
-    return 1;
-    */
 }

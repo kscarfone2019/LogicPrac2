@@ -14,7 +14,8 @@ void makeHeader(int n);
 int main() {
     stack workStack;
     stackInit(&workStack, 6);
-
+    //array of a b and c for each row and then stack with 1s or 0s
+    //push pop like calculator
 
     int arg1 = 3;
     char arg2[] = "ab&c|";
@@ -54,7 +55,7 @@ int *evaluate(int n, char operand) {
 
         }
     printf(" :   %d\n", result);
-    //results[i] = result;
+    results[i] = result;
     //return results;
     }
 }
