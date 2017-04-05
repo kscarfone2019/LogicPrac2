@@ -50,8 +50,13 @@ int *evaluate(int n, char operand) {
         result=1;
         for(int j=n-1;j>=0;j--) {
             nVal=i>>j; //assigns 1 or 0 to result depeing if there equal or not (*bitwise right shift)
+            printf("hi there!!: %i\n", nVal);
             printf(" %d ",nVal & 1);
-            result = result &(nVal & 1);
+
+
+
+
+            result = result ^(nVal & 1);
 
         }
     printf(" :   %d\n", result);

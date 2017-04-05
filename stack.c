@@ -21,6 +21,12 @@ stackElement stackPop(stack *stackP) {
         exit(1);
     }
     //return the top value and then subtract one from top
+    /*
+    char temp = stackP->contents[stackP->top];
+    stackP->contents[stackP->top] = NULL;
+    stackP->top--;
+    return temp;
+    */
     return stackP->contents[stackP->top--];
 }
 

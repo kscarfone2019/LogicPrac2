@@ -1,8 +1,8 @@
 #include<stdio.h>
 int fun(int a)
 {
-int r=1;
-while(a--)
+    int r=1;
+    while(a--)
 {
  r*= 2;
 }
@@ -20,17 +20,21 @@ printf("enter ur choice 1 for Or gate 2 for and gate 3 for xor 4 for xnor 5 for 
 scanf("%d",&ch);
 switch(ch)
  {
+
+
  case 1: for(i=0;i<=fun(n)-1;i++)
- {
- for(j=n-1;j>=0;j--)
- {
- mask=i>>j;
- printf("%d\t", mask & 1);
- or=or |(mask & 1);
- }
- printf("%d\n",or);
+    {
+        for(j=n-1;j>=0;j--)
+    {
+        mask=i>>j;
+        printf("%d\t", mask & 1);
+        or=or |(mask & 1);
+    }
+    printf("%d\n",or);
  }
  break;
+
+
  case 2 : for(i=0;i<=fun(n)-1;i++)
  {and=1;
  for(j=n-1;j>=0;j--)
@@ -44,6 +48,8 @@ switch(ch)
  printf("%d\n", and);
  }
  break;
+
+
  case 3: for(i=0;i<=fun(n)-1;i++)
  {xor=0;
  for(j=n-1;j>=0;j--)
@@ -55,6 +61,8 @@ switch(ch)
  printf("%d\n",xor);
  }
  break;
+
+
 case 4:for(i=0;i<=fun(n)-1;i++)
  {xnor=1;
  for(j=n-1;j>=0;j--)
@@ -66,6 +74,8 @@ case 4:for(i=0;i<=fun(n)-1;i++)
  printf("%d\n",xnor);
  }
  break;
+
+
 case 5:for(i=0;i<=fun(n)-1;i++)
  {nand=1;
  for(j=n-1;j>=0;j--)
